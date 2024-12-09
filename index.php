@@ -61,40 +61,12 @@ if (!empty($query)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client6</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
 
-        textarea {
-            width: 100%;
-            height: 100px;
-        }
-
-        button {
-            margin-top: 10px;
-            padding: 10px 20px;
-        }
-
-        table {
-            margin-top: 20px;
-            width: 100%;
-            text-align: left;
-        }
-
-        th,
-        td {
-            padding: 8px 12px;
-        }
-
-        th {
-            background-color: #f4f4f4;
-        }
-    </style>
+    <link rel="stylesheet" href="css/main-style.css">    
+    
     <script>
         function clearResult() {
-            document.getElementById("result").innerHTML = "";  // Очищаем содержимое блока с id="result"
+            document.getElementById("result").innerHTML = "";
         }
     </script>
 </head>
