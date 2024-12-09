@@ -60,7 +60,10 @@ if (!empty($query)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client6</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+        }
         textarea { width: 100%; height: 100px; }
         button { margin-top: 10px; padding: 10px 20px; }
         table { margin-top: 20px; width: 100%; text-align: left; }
@@ -72,7 +75,7 @@ if (!empty($query)) {
     <h1>Client6: Работа с базой данных <?=DB_NAME ?></h1>
     <form method="POST">
         <label for="query">Введите SQL-запрос:</label>
-        <textarea name="query" id="query"><?= htmlspecialchars($query) ?></textarea><br>
+        <textarea name="query" id="query" required><?= htmlspecialchars($query) ?></textarea><br>
         <button type="submit">Выполнить</button>
     </form>
     <div>
@@ -83,5 +86,5 @@ if (!empty($query)) {
 </html>
 
 <?php
-$conn->close();
+$connection->close();
 ?>
