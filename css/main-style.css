@@ -99,8 +99,8 @@ tr:nth-child(odd) {
     color: #D3D3D3;
     border: 1px solid #555;
 
-    min-width: 80%;
-    width: 80%;
+
+    width: 91em;
     min-height: 100px;
 
 }
