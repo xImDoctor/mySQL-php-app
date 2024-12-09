@@ -1,24 +1,27 @@
 <?php
 
 // подключение
-require_once 'data/db-data.php'; // данные базы
-$connection = new mysqli(HOST, USER, PASSW, DB_NAME);
+require_once 'data/db-data.php';
+$connection = new mysqli(HOST, USER, PASSW, DB_NAME); // ООП вариант, mysqli_connect как процедурный стиль
 
-// Проверка соединения
 if ($connection->connect_error)
     die("Ошибка подключения: " . $connection->connect_error);
 
-// Инициализация сессии
-session_start();
+
+session_start();    // сессия для хранения значений
 
 
-// Функция для форматирования таблицы
-function formatTable($result)
+/**
+ * Функция для форматирования таблицы
+ * @param mixed $result - Принимает набор данных от SQL.
+ * @return string - Возвращает строку с HTML-разметкой итоговой таблицы
+ */
+function formatTable($result): string
 {
     $output = "<table>";
     $output .= "<tr>";
 
-    foreach ($result->fetch_fields() as $field)
+    foreach ($result->fetch_fields() as $field) // метаданные результирующего набора
         $output .= "<th>" . htmlspecialchars($field->name) . "</th>";
     $output .= "</tr>";
 
@@ -42,7 +45,7 @@ $output = '';
 if (!empty($query)) {
     try {
         // Выполнение запроса с проверкой ошибок
-        $result = $connection->query($query);
+        $result = $connection->query($query);   //м-но MYSQLI_USE_RESULT, по умолчанию STORE
 
         if ($result) {
             if ($result instanceof mysqli_result)
