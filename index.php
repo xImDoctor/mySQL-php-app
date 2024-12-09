@@ -2,50 +2,54 @@
 
 // подключение
 require_once 'data/db-data.php'; // данные базы
-$conn = new mysqli(HOST, USER, PASSW, DB_NAME);
+$connection = new mysqli(HOST, USER, PASSW, DB_NAME);
 
 // Проверка соединения
-if ($conn->connect_error) {
-    die("Ошибка подключения: " . $conn->connect_error);
-}
+if ($connection->connect_error)
+    die("Ошибка подключения: " . $connection->connect_error);
 
-// Функция для форматированного вывода таблицы
+
+/**
+ * Функция для форматирования таблицы
+ * @param mixed $result - результат, полученный в запросе.
+ * @return string   - Возвращает строку с HTML-разметкой итоговой таблицы с данными.
+ */
 function formatTable($result) {
     $output = "<table border='1' cellpadding='5' cellspacing='0' style='border-collapse:collapse;'>";
     $output .= "<tr>";
-    foreach ($result->fetch_fields() as $field) {
+
+    foreach ($result->fetch_fields() as $field)
         $output .= "<th>" . htmlspecialchars($field->name) . "</th>";
-    }
     $output .= "</tr>";
 
     while ($row = $result->fetch_assoc()) {
         $output .= "<tr>";
-        foreach ($row as $value) {
+        foreach ($row as $value)
             $output .= "<td>" . htmlspecialchars($value) . "</td>";
-        }
         $output .= "</tr>";
     }
+
     $output .= "</table>";
+
     return $output;
 }
 
-// Выполнение пользовательского запроса
+// Выполнение запроса
 $query = isset($_POST['query']) ? $_POST['query'] : '';
 $output = '';
 
 if (!empty($query)) {
-    $result = $conn->query($query);
+    $result = $connection->query($query);
+
     if ($result) {
-        if ($result instanceof mysqli_result) {
-            // Запрос с возвратом результата
-            $output = formatTable($result);
-        } else {
-            // Запрос без возврата результата
-            $output = "Запрос успешно выполнен.";
-        }
-    } else {
-        $output = "Ошибка выполнения запроса: " . $conn->error;
-    }
+
+        if ($result instanceof mysqli_result) 
+            $output = formatTable($result);           // Запрос с возвратом результата
+        else 
+            $output = "Запрос успешно выполнен.";             // Запрос без возврата результата
+
+    } else
+        $output = "Ошибка выполнения запроса: " . $connection->error;
 }
 ?>
 
@@ -65,7 +69,7 @@ if (!empty($query)) {
     </style>
 </head>
 <body>
-    <h1>Client6: Работа с базой данных consult_company</h1>
+    <h1>Client6: Работа с базой данных <?=DB_NAME ?></h1>
     <form method="POST">
         <label for="query">Введите SQL-запрос:</label>
         <textarea name="query" id="query"><?= htmlspecialchars($query) ?></textarea><br>
