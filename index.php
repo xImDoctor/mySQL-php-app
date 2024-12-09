@@ -8,6 +8,9 @@ $connection = new mysqli(HOST, USER, PASSW, DB_NAME);
 if ($connection->connect_error)
     die("Ошибка подключения: " . $connection->connect_error);
 
+    // Инициализация сессии для очистки значений
+session_start();
+
 
 /**
  * Функция для форматирования таблицы
@@ -63,7 +66,7 @@ if (!empty($query)) {
     <title>Client6</title>
 
     <link rel="stylesheet" href="css/main-style.css">    
-    
+
     <script>
         function clearResult() {
             document.getElementById("result").innerHTML = "";
@@ -75,13 +78,15 @@ if (!empty($query)) {
     <h1>Client6: Работа с базой данных <?= DB_NAME ?></h1>
     <form method="POST">
         <label for="query">Введите SQL-запрос:</label>
-        <textarea name="query" id="query" required><?= htmlspecialchars($query) ?></textarea><br>
+        <textarea name="query" id="query" required><?= htmlspecialchars($_SESSION['query'] ?? '') ?></textarea><br>
         <button type="submit">Выполнить</button>
     </form>
-    <div>
-        <h2>Результат:</h2>
-        <p><a href="javascript:void(0);" id="cleanse" onclick="clearResult()">Очистить</a></p>
-        <div id="result"><?= $output ?></div>
+    <div class="result-block">
+
+        <?php
+            if (isset($_SESSION['output']) && $_SESSION['output'] !== "")
+                include_once "result-block.php";
+        ?>
     </div>
 </body>
 
