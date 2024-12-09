@@ -37,28 +37,30 @@ function formatTable($result): string
     return $output;
 }
 
-// Выполнение запроса
+// переменные для запроса и вывода
 $query = isset($_POST['query']) ? $_POST['query'] : "";
 $_SESSION['query'] = $query; 
 $output = '';
 
+
+// обработка запроса
 if (!empty($query)) {
     try {
-        // Выполнение запроса с проверкой ошибок
+
         $result = $connection->query($query);   //м-но MYSQLI_USE_RESULT, по умолчанию STORE
 
         if ($result) {
-            if ($result instanceof mysqli_result)
-                $_SESSION['output'] = formatTable($result);  // Запрос с возвратом результата
+            if ($result instanceof mysqli_result)   // проверка на наличие результата (объект класса mysqli_result)
+                $_SESSION['output'] = formatTable($result);
             else
-                $_SESSION['output'] = "Запрос успешно выполнен.";  // Запрос без возврата результата
+                $_SESSION['output'] = "Запрос успешно выполнен.";
         }
     } catch (mysqli_sql_exception $e) {
         $_SESSION['output'] = "Ошибка выполнения запроса: " . $e->getMessage();  // Сохраняем ошибку в сессии
     }
-} else {
+} else
     $_SESSION['output'] = '';
-}
+
 
 ?>
 
@@ -68,10 +70,9 @@ if (!empty($query)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client6</title>
+    <title>Client6: <?=DB_NAME?></title>
 
     <link rel="stylesheet" href="css/main-style.css">
-
     <script src="clear.js" defer></script>
 </head>
 
@@ -83,8 +84,8 @@ if (!empty($query)) {
         <button type="submit">Выполнить</button>
     </form>
     
+    <!-- вывод результата -->
     <div class="result-block">
-
         <?php
             if (isset($_SESSION['output']) && $_SESSION['output'] !== "")
                 include_once "result-block.php";
