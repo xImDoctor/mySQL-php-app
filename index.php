@@ -14,7 +14,8 @@ if ($connection->connect_error)
  * @param mixed $result - результат, полученный в запросе.
  * @return string   - Возвращает строку с HTML-разметкой итоговой таблицы с данными.
  */
-function formatTable($result) {
+function formatTable($result)
+{
     $output = "<table border='1' cellpadding='5' cellspacing='0' style='border-collapse:collapse;'>";
     $output .= "<tr>";
 
@@ -35,17 +36,17 @@ function formatTable($result) {
 }
 
 // Выполнение запроса
-$query = isset($_POST['query']) ? $_POST['query'] : '';
-$output = '';
+$query = isset($_POST['query']) ? $_POST['query'] : "";
+$output = "";
 
 if (!empty($query)) {
     $result = $connection->query($query);
 
     if ($result) {
 
-        if ($result instanceof mysqli_result) 
+        if ($result instanceof mysqli_result)
             $output = formatTable($result);           // Запрос с возвратом результата
-        else 
+        else
             $output = "Запрос успешно выполнен.";             // Запрос без возврата результата
 
     } else
@@ -55,24 +56,51 @@ if (!empty($query)) {
 
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client6</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 20px; 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
-        textarea { width: 100%; height: 100px; }
-        button { margin-top: 10px; padding: 10px 20px; }
-        table { margin-top: 20px; width: 100%; text-align: left; }
-        th, td { padding: 8px 12px; }
-        th { background-color: #f4f4f4; }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 8px 12px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
     </style>
+    <script>
+        function clearResult() {
+            document.getElementById("result").innerHTML = "";  // Очищаем содержимое блока с id="result"
+        }
+    </script>
 </head>
+
 <body>
-    <h1>Client6: Работа с базой данных <?=DB_NAME ?></h1>
+    <h1>Client6: Работа с базой данных <?= DB_NAME ?></h1>
     <form method="POST">
         <label for="query">Введите SQL-запрос:</label>
         <textarea name="query" id="query" required><?= htmlspecialchars($query) ?></textarea><br>
@@ -80,9 +108,11 @@ if (!empty($query)) {
     </form>
     <div>
         <h2>Результат:</h2>
-        <?= $output ?>
+        <p><a href="javascript:void(0);" id="cleanse" onclick="clearResult()">Очистить</a></p>
+        <div id="result"><?= $output ?></div>
     </div>
 </body>
+
 </html>
 
 <?php
