@@ -3,6 +3,6 @@
 
 <?php
 
-echo "<div id=\"result\">" . htmlspecialchars($_SESSION['output']) . "</div>";
+echo "<div id=\"result\">" . $_SESSION['output'] . "</div>";
 
 ?>

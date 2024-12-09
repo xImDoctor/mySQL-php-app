@@ -19,7 +19,7 @@ session_start();
  */
 function formatTable($result)
 {
-    $output = "<table border='1' cellpadding='5' cellspacing='0' style='border-collapse:collapse;'>";
+    $output = "<table>";
     $output .= "<tr>";
 
     foreach ($result->fetch_fields() as $field)
@@ -40,21 +40,27 @@ function formatTable($result)
 
 // Выполнение запроса
 $query = isset($_POST['query']) ? $_POST['query'] : "";
-$output = "";
+$output = '';
+
 
 if (!empty($query)) {
-    $result = $connection->query($query);
+    try {
+        // Выполнение запроса с проверкой ошибок
+        $result = $connection->query($query);
 
-    if ($result) {
+        if ($result) {
+            if ($result instanceof mysqli_result)
+                $_SESSION['output'] = formatTable($result);  // Запрос с возвратом результата
+            else
+              $_SESSION['output'] = "Запрос успешно выполнен.";  // Запрос без возврата результата
+            
+        }
+    } catch (mysqli_sql_exception $e) {
+        $_SESSION['output'] = "Ошибка выполнения запроса: " . $e->getMessage();  // Сохраняем ошибку в сессии
+    }
+} else 
+    $_SESSION['output'] = 'Введите запрос';
 
-        if ($result instanceof mysqli_result)
-            $output = formatTable($result);           // Запрос с возвратом результата
-        else
-            $output = "Запрос успешно выполнен.";             // Запрос без возврата результата
-
-    } else
-        $output = "Ошибка выполнения запроса: " . $connection->error;
-}
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +84,7 @@ if (!empty($query)) {
     <h1>Client6: Работа с базой данных <?= DB_NAME ?></h1>
     <form method="POST">
         <label for="query">Введите SQL-запрос:</label>
-        <textarea name="query" id="query" required><?= htmlspecialchars($_SESSION['query'] ?? '') ?></textarea><br>
+        <textarea name="query" id="query"><?= htmlspecialchars($_SESSION['query'] ?? '') ?></textarea><br>
         <button type="submit">Выполнить</button>
     </form>
     <div class="result-block">

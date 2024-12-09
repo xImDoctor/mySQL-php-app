@@ -100,7 +100,7 @@ tr:nth-child(odd) {
     border: 1px solid #555;
 
 
-    width: 91em;
+    min-width: 91em;
     min-height: 100px;
 
 }
