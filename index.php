@@ -1,7 +1,7 @@
 <?php
 
 // подключение
-require_once 'db-data.php'; // данные базы
+require_once 'data/db-data.php'; // данные базы
 $conn = new mysqli(HOST, USER, PASSW, DB_NAME);
 
 // Проверка соединения
