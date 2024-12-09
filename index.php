@@ -11,12 +11,6 @@ if ($connection->connect_error)
 // Инициализация сессии
 session_start();
 
-// Очистка данных сессии (query и output) при запросе
-if (isset($_POST['clear']) && $_POST['clear'] == '1') {
-    // Очистка значений сессии
-    unset($_SESSION['output']);
-    unset($_SESSION['query']);
-}
 
 // Функция для форматирования таблицы
 function formatTable($result)
@@ -42,6 +36,7 @@ function formatTable($result)
 
 // Выполнение запроса
 $query = isset($_POST['query']) ? $_POST['query'] : "";
+$_SESSION['query'] = $query; 
 $output = '';
 
 if (!empty($query)) {
@@ -74,12 +69,7 @@ if (!empty($query)) {
 
     <link rel="stylesheet" href="css/main-style.css">
 
-    <script>
-        // Функция очистки результата с помощью отправки формы на сервер
-        function clearResult() {
-            document.getElementById("clearForm").submit();
-        }
-    </script>
+    <script src="clear.js" defer></script>
 </head>
 
 <body>
