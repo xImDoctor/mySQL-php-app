@@ -1,29 +1,114 @@
+/* Основной фон и текст */
 body {
     font-family: Arial, sans-serif;
+    background-color: #2E2E2E; /* тёмный фон */
+    color: #D3D3D3; /* светлый текст */
     margin: 20px;
+    font-size: 16px; /* увеличен размер шрифта */
 }
 
+/* Заголовок h1 отдельно */
+h1 {
+    font-size: 28px; /* увеличен размер шрифта для h1 */
+    color: #F0F0F0; /* светлый цвет для заголовка */
+    margin-bottom: 20px;
+}
+
+/* Стили для текста "Введите SQL-запрос" */
+label {
+    font-size: 18px; /* увеличен размер шрифта */
+    margin-bottom: 10px; /* отступ снизу */
+    display: block; /* на отдельной строке */
+}
+
+/* Стили для textarea */
 textarea {
-    width: 100%;
+    width: 80%; /* фиксированная ширина, чуть уже */
     height: 100px;
+    background-color: #3A3A3A; /* тёмный фон для текстового поля */
+    color: #D3D3D3; /* светлый текст */
+    border: 1px solid #555; /* тёмная рамка */
+    padding: 10px;
+    font-size: 16px; /* увеличен размер шрифта */
 }
 
+/* Стили для кнопки "Выполнить" */
 button {
-    margin-top: 10px;
-    padding: 10px 20px;
+    margin-top: 20px;
+    padding: 12px 24px; /* увеличены размеры кнопки */
+    background-color: #3498DB; /* ярко-синий цвет для кнопки */
+    color: #FFFFFF; /* белый текст */
+    border: none;
+    cursor: pointer;
+    font-size: 18px; /* увеличен размер шрифта */
 }
 
+button:hover {
+    background-color: #2980B9; /* темнее при наведении */
+}
+
+/* Стили для ссылки "Очистить" */
+#cleanse {
+    color: #F79C42; /* ярко-оранжевая ссылка */
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px; /* увеличен размер шрифта */
+}
+
+#cleanse:hover {
+    color: #F1C40F; /* при наведении цвет изменяется на жёлтый */
+}
+
+/* Стили для таблицы */
 table {
     margin-top: 20px;
     width: 100%;
     text-align: left;
+    border-collapse: collapse;
+    background-color: #3A3A3A; /* тёмный фон для таблицы */
 }
 
-th,
-td {
-    padding: 8px 12px;
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #555; /* тёмная рамка */
 }
 
 th {
-    background-color: #f4f4f4;
+    background-color: #4B4B4B; /* темно-серый фон для заголовков */
+    color: #D3D3D3; /* светлый текст в заголовках */
+}
+
+td {
+    color: #E0E0E0; /* светлый текст для ячеек */
+}
+
+tr:nth-child(even) {
+    background-color: #4B4B4B; /* чередование строк с тёмным фоном */
+}
+
+tr:nth-child(odd) {
+    background-color: #3A3A3A; /* чётные строки имеют немного светлее фон */
+}
+
+/* Стиль для области с результатами */
+#result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #3A3A3A;
+    color: #D3D3D3;
+    border: 1px solid #555;
+
+    width: 80%;
+}
+
+/* Размещение кнопки "Очистить" правее заголовка "Результат" */
+.result-block {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.result-block #cleanse {
+    margin-left: 20px;
+
 }
