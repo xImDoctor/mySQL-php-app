@@ -48,7 +48,7 @@ button:hover {
 }
 
 /* Стили для ссылки "Очистить" */
-#cleanse {
+.cleanse {
     color: #F79C42; /* ярко-оранжевая ссылка */
     text-decoration: none;
     font-weight: bold;
@@ -56,7 +56,7 @@ button:hover {
     font-size: 18px; /* увеличен размер шрифта */
 }
 
-#cleanse:hover {
+.cleanse:hover {
     color: #F1C40F; /* при наведении цвет изменяется на жёлтый */
 }
 

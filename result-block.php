@@ -1,5 +1,9 @@
 <h2>Результат:</h2>
-<p><a href="javascript:void(0);" id="cleanse" onclick="clearResult()">Очистить</a></p>
+<!-- Форма для очистки сессии -->
+<form id="clearForm" method="POST">
+    <input type="hidden" name="clear" value="1">
+</form>
+<p><a class="cleanse" href="javascript:void(0);" onclick="clearResult()">Очистить</a></p>
 
 <?php
 

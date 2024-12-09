@@ -8,15 +8,17 @@ $connection = new mysqli(HOST, USER, PASSW, DB_NAME);
 if ($connection->connect_error)
     die("Ошибка подключения: " . $connection->connect_error);
 
-    // Инициализация сессии для очистки значений
+// Инициализация сессии
 session_start();
 
+// Очистка данных сессии (query и output) при запросе
+if (isset($_POST['clear']) && $_POST['clear'] == '1') {
+    // Очистка значений сессии
+    unset($_SESSION['output']);
+    unset($_SESSION['query']);
+}
 
-/**
- * Функция для форматирования таблицы
- * @param mixed $result - результат, полученный в запросе.
- * @return string   - Возвращает строку с HTML-разметкой итоговой таблицы с данными.
- */
+// Функция для форматирования таблицы
 function formatTable($result)
 {
     $output = "<table>";
@@ -42,7 +44,6 @@ function formatTable($result)
 $query = isset($_POST['query']) ? $_POST['query'] : "";
 $output = '';
 
-
 if (!empty($query)) {
     try {
         // Выполнение запроса с проверкой ошибок
@@ -52,14 +53,14 @@ if (!empty($query)) {
             if ($result instanceof mysqli_result)
                 $_SESSION['output'] = formatTable($result);  // Запрос с возвратом результата
             else
-              $_SESSION['output'] = "Запрос успешно выполнен.";  // Запрос без возврата результата
-            
+                $_SESSION['output'] = "Запрос успешно выполнен.";  // Запрос без возврата результата
         }
     } catch (mysqli_sql_exception $e) {
         $_SESSION['output'] = "Ошибка выполнения запроса: " . $e->getMessage();  // Сохраняем ошибку в сессии
     }
-} else 
-    $_SESSION['output'] = 'Введите запрос';
+} else {
+    $_SESSION['output'] = '';
+}
 
 ?>
 
@@ -71,11 +72,12 @@ if (!empty($query)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client6</title>
 
-    <link rel="stylesheet" href="css/main-style.css">    
+    <link rel="stylesheet" href="css/main-style.css">
 
     <script>
+        // Функция очистки результата с помощью отправки формы на сервер
         function clearResult() {
-            document.getElementById("result").innerHTML = "";
+            document.getElementById("clearForm").submit();
         }
     </script>
 </head>
@@ -84,9 +86,10 @@ if (!empty($query)) {
     <h1>Client6: Работа с базой данных <?= DB_NAME ?></h1>
     <form method="POST">
         <label for="query">Введите SQL-запрос:</label>
-        <textarea name="query" id="query"><?= htmlspecialchars($_SESSION['query'] ?? '') ?></textarea><br>
+        <textarea name="query" id="query" required><?= htmlspecialchars($_SESSION['query'] ?? '') ?></textarea><br>
         <button type="submit">Выполнить</button>
     </form>
+    
     <div class="result-block">
 
         <?php
