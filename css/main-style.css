@@ -100,6 +100,7 @@ tr:nth-child(odd) {
     border: 1px solid #555;
 
     width: 80%;
+    min-height: 100px;
 }
 
 /* Размещение кнопки "Очистить" правее заголовка "Результат" */
@@ -108,7 +109,4 @@ tr:nth-child(odd) {
     margin-right: 10px;
 }
 
-.result-block #cleanse {
-    margin-left: 20px;
 
-}
