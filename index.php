@@ -50,10 +50,10 @@ if (!empty($query)) {
         $result = $connection->query($query);   //м-но MYSQLI_USE_RESULT, по умолчанию STORE
 
         if ($result) {
-            if ($result instanceof mysqli_result)   // проверка на наличие результата (объект класса mysqli_result)
+            if ($result instanceof mysqli_result) // проверка на наличие результата (объект класса mysqli_result)
                 $_SESSION['output'] = formatTable($result);
             else
-                $_SESSION['output'] = "Запрос успешно выполнен.";
+                $_SESSION['output'] = "Запрос успешно выполнен, затронуто строк: " . $connection->affected_rows;
         }
     } catch (mysqli_sql_exception $e) {
         $_SESSION['output'] = "Ошибка выполнения запроса: " . $e->getMessage();  // Сохраняем ошибку в сессии
