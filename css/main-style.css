@@ -1,63 +1,62 @@
-/* Основной фон и текст */
 body {
     font-family: Arial, sans-serif;
-    background-color: #2E2E2E; /* тёмный фон */
-    color: #D3D3D3; /* светлый текст */
+    background-color: #2E2E2E; 
+    color: #D3D3D3; 
     margin: 20px;
-    font-size: 16px; /* увеличен размер шрифта */
+    font-size: 16px; 
 }
 
-/* Заголовок h1 отдельно */
+
 h1 {
-    font-size: 28px; /* увеличен размер шрифта для h1 */
-    color: #F0F0F0; /* светлый цвет для заголовка */
+    font-size: 28px; 
+    color: #F0F0F0; 
     margin-bottom: 20px;
 }
 
 /* Стили для текста "Введите SQL-запрос" */
 label {
-    font-size: 18px; /* увеличен размер шрифта */
-    margin-bottom: 10px; /* отступ снизу */
-    display: block; /* на отдельной строке */
+    font-size: 18px; 
+    margin-bottom: 10px; 
+    display: block;
 }
 
 /* Стили для textarea */
 textarea {
-    width: 80%; /* фиксированная ширина, чуть уже */
+    width: 80%;
     height: 100px;
-    background-color: #3A3A3A; /* тёмный фон для текстового поля */
-    color: #D3D3D3; /* светлый текст */
-    border: 1px solid #555; /* тёмная рамка */
+    background-color: #3A3A3A; 
+    color: #D3D3D3; 
+    border: 1px solid #555; 
     padding: 10px;
-    font-size: 16px; /* увеличен размер шрифта */
+    font-size: 16px; 
 }
 
 /* Стили для кнопки "Выполнить" */
 button {
     margin-top: 20px;
-    padding: 12px 24px; /* увеличены размеры кнопки */
-    background-color: #3498DB; /* ярко-синий цвет для кнопки */
-    color: #FFFFFF; /* белый текст */
+    padding: 12px 24px; 
+    background-color: #3498DB; 
+    color: #FFFFFF; 
     border: none;
     cursor: pointer;
-    font-size: 18px; /* увеличен размер шрифта */
+    font-size: 18px;
 }
 
 button:hover {
-    background-color: #2980B9; /* темнее при наведении */
+    background-color: #2980B9; 
 }
 
 /* Стили для ссылки "Очистить" */
 .cleanse {
-    color: #F79C42; /* ярко-оранжевая ссылка */
+    color: #F79C42;
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
-    font-size: 18px; /* увеличен размер шрифта */
+    font-size: 18px; 
 }
 
 .cleanse:hover {
-    color: #F1C40F; /* при наведении цвет изменяется на жёлтый */
+    color: #F1C40F; 
 }
 
 /* Стили для таблицы */
@@ -66,7 +65,7 @@ table {
     width: 100%;
     text-align: left;
     border-collapse: collapse;
-    background-color: #3A3A3A; /* тёмный фон для таблицы */
+    background-color: #3A3A3A; /*  фон для таблицы */
 }
 
 th, td {
@@ -75,20 +74,20 @@ th, td {
 }
 
 th {
-    background-color: #4B4B4B; /* темно-серый фон для заголовков */
-    color: #D3D3D3; /* светлый текст в заголовках */
+    background-color: #4B4B4B; 
+    color: #D3D3D3; 
 }
 
 td {
-    color: #E0E0E0; /* светлый текст для ячеек */
+    color: #E0E0E0; 
 }
 
 tr:nth-child(even) {
-    background-color: #4B4B4B; /* чередование строк с тёмным фоном */
+    background-color: #4B4B4B; 
 }
 
 tr:nth-child(odd) {
-    background-color: #3A3A3A; /* чётные строки имеют немного светлее фон */
+    background-color: #3A3A3A; 
 }
 
 /* Стиль для области с результатами */
